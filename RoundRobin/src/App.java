@@ -3,6 +3,8 @@ import java.util.Arrays;
 import models.Process.Status;
 import services.Executer;
 
+import utils.ui.Getter;
+
 public class App {
     public static void main(String[] args) {
         App app = new App();
@@ -10,11 +12,43 @@ public class App {
     }
 
     public void run() {
-        // * Hard coded input
-        int numberOfProcesses = 3;
-        int[] processTime = {6, 2, 4};
-        int q = 2;
+        boolean continueSimulation;
 
+        do {
+            buildSimulation();
+            continueSimulation = Getter.getYesOrNo("Vol continuar la simulació?");
+            System.out.println();
+        } while (continueSimulation);
+
+        System.out.println("Fins aviat!");
+    }
+
+    /**
+     * Construeix la simulació demanant les dades a l'usuari.
+     */
+    private void buildSimulation() {
+        int numberOfProcesses = Getter.getNumberOfProcesses();
+        int[] processTime = new int[numberOfProcesses];
+
+        for (int i = 0; i < numberOfProcesses; i++) {
+            processTime[i] = Getter.getProcessTime(i + 1);
+        }
+
+        int q = Getter.getQuantum();
+
+        System.out.println();
+
+        executeSimulation(numberOfProcesses, processTime, q);
+    }
+
+    /**
+     * Executa la simulació i mostra els resultats.
+     * 
+     * @param numberOfProcesses Nombre de processos.
+     * @param processTime Temps de cada procés.
+     * @param q Quantum.
+     */
+    private void executeSimulation(int numberOfProcesses, int[] processTime, int q) {
         // * Execució
         Executer executer = new Executer(numberOfProcesses, processTime, q);
         executer.execute();

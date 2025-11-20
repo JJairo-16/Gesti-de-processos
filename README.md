@@ -18,31 +18,33 @@ L’objectiu del simulador és mostrar, de manera pràctica, com funciona el Rou
 
 ## Com funciona?
 
-1. **Nombre de processos**  
-   El nombre total de processos també està definit dins del codi:
+El simulador funciona de manera interactiva a través de la línia d’ordres.  
+Quan l’usuari l’executa, el programa segueix aquest procés:
 
-   ```java
-   int numberOfProcesses = 3;
-   ```
+1. **Introduir el nombre de processos**  
+   El programa demana quants processos es volen simular.  
+   Si s’introdueix `0`, es pregunta si es vol sortir del programa.
 
-2. **Definició dels processos**  
-   Els processos i els seus temps de ràfega estan actualment definits directament al codi:
+2. **Introduir el temps de cada procés**  
+   Per a cada procés, l’usuari introdueix el seu temps de ràfega (temps de CPU necessari).
 
-   ```java
-   int[] processTime = {6, 2, 4};
-    ```
+3. **Introduir el quantum**  
+   Finalment, es demana el valor del *quantum*, que és la quantitat màxima de temps que pot utilitzar cada procés abans de cedir la CPU.
 
-    Cada valor representa el temps de CPU que necessita cada procés per completar-se.
+4. **Execució de la simulació**  
+   El simulador aplica l’algorisme Round Robin amb les dades introduïdes i calcula:
 
-3. **Definició del quantum**
+   * el temps de finalització de cada procés,
+   * el *turnaround time* (TAT),
+   * el *waiting time* (WT),
+   * i les mitjanes de tots dos valors.
 
-    El temps de quantum també està fixat manualment al programa:
+5. **Visualització dels resultats**  
+   Es mostra una taula amb els resultats de tots els processos i les mitjanes finals.
 
-    ```java
-    int q = 2;
-    ```
-
-    Aquest valor indica quantes unitats de temps pot utilitzar un procés abans de cedir la CPU al següent.
+6. **Repetició opcional**  
+   En acabar, el programa pregunta si l’usuari vol fer una nova simulació.  
+   Si es respon “sí”, el procés es repeteix des del principi; si es respon “no”, el programa finalitza.
 
 ---
 
